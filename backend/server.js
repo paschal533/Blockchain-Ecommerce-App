@@ -2,7 +2,7 @@ const Koa = require('koa');
 const Router = require('@koa/router');
 const cors = require('@koa/cors');
 const ethers = require('ethers');
-const PaymentProcessor = require('../build/contracts/PaymentProcessor.json');
+const PaymentProcessor = require('../frontend/src/contracts/PaymentProcessor.json');
 const { Payment } = require('db.js');
 
 const app = new Koa();
@@ -58,6 +58,11 @@ const listenToEvents = () => {
     );
 
     paymentProcessor.on('PaymentDone', async (payer, amount, paymentId, date) => {
-
+        const payment = await Payment.findOne({id: paymentId});
+        if(payment){
+            payment.paid = true;
+            await payment.save();
+        }
     })
 }   
+listenToEvents();

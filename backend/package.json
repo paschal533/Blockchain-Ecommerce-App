@@ -8,5 +8,12 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "@koa/router": "^10.1.1",
+    "ethers": "^5.5.3",
+    "koa": "^2.13.4",
+    "mongoose": "^6.1.7"
+  }
 }
