@@ -20,7 +20,12 @@ function Store({ paymentProcessor, dai }) {
         const tx1 = await dai.approve(paymentProcessor.address, item.price);
         await tx1.wait();
 
-        const res = await paymentProcessor.pay(item.price, response1.data.paymentId);
+        const tx2 = await paymentProcessor.pay(item.price, response1.data.paymentId);
+        await tx2.wait();
+
+        await new Promise(resolve => setTimeout(resolve, 5000));
+
+        const response2 = await axios.get(`${API_URL}/api/getItenUrl/${response1.data.paymentId}`);
     }
     return (
         <ul className="list-group">
@@ -29,7 +34,7 @@ function Store({ paymentProcessor, dai }) {
                 <button
                    type="button"
                    className="btn btn-primary float-right"
-                   onClick={() => buy(ITEMS[0])}>
+                   onClick={() => Buy(ITEMS[0])}>
                        Buy
                    </button>
             </li>
@@ -38,10 +43,12 @@ function Store({ paymentProcessor, dai }) {
                 <button
                    type="button"
                    className="btn btn-primary float-right"
-                   onClick={() => buy(ITEMS[1])}>
+                   onClick={() => Buy(ITEMS[1])}>
                        Buy
                    </button>
             </li>
         </ul>
     )
 }
+
+export default Store;

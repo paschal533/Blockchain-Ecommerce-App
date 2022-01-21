@@ -1,5 +1,5 @@
-import { ether, Contract } from 'ethers';
-import PaymentProcessor from '../../build/contracts/PaymentProcessor.json';
+import { ethers, Contract } from 'ethers';
+import PaymentProcessor from './contracts/PaymentProcessor.json';
 import Dai from './contracts/Dai.json';
 
 const getBlockchain = () => {
@@ -7,7 +7,7 @@ const getBlockchain = () => {
         window.addEventListener('load', async () => {
             if(window.ethereum) {
                 await window.ethereum.enable();
-                const provider = new ether.provider.Web3Provider(window.ethereum);
+                const provider = new ethers.providers.Web3Provider(window.ethereum);
                 const signer = provider.getSigner();
 
                 const paymentProcessor = new Contract(

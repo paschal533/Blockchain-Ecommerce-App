@@ -30,7 +30,7 @@ function App() {
     <div className="container">
       <div className="col-sm-12">
         <h1>Blockchain Ecommerce App</h1>
-        <Store pay />
+        <Store paymentProcessor={paymentProcessor} dai={dai} />
       </div>
     </div>
   );
